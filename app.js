@@ -13,7 +13,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.render('home', {homeStartingContent: homeStartingContent});
+  res.render('home', {
+    homeStartingContent: homeStartingContent,
+    posts: posts
+  });
 });
 
 app.get("/about", (req, res) => {
@@ -30,10 +33,11 @@ app.get("/compose", (req, res) => {
 
 app.post("/compose", (req, res) => {
   const post = {
-    "postTitle": req.body.postTitle,
-    "postBody": req.body.postContent
+    title: req.body.postTitle,
+    content: req.body.postContent
   };
   posts.push(post);
+  res.redirect("/");
 });
 
 
