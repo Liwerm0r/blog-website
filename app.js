@@ -22,13 +22,21 @@ app.get("/posts/:postTitle", (req, res) => {
   posts.forEach( post => {
     if ( _.kebabCase(post.title) === _.kebabCase(requestedTitle) ) {
       res.render('post', {post: post});
-    } else {
-      res.redirect("/");
     }
   });
 });
 
 app.get("/", (req, res) => {
+  // pass only 100 characters wide post content to homepage
+  // const charactersLimit = 100;
+  // const shortenedPosts = [];
+  // posts.forEach( post => {
+  //   const shortenedPost = {
+  //     title: post.title,
+  //     content: post.content.substring(0, charactersLimit) + "..."
+  //   };
+  //   shortenedPosts.push(shortenedPost);
+  // });
   res.render('home', {
     homeStartingContent: homeStartingContent,
     posts: posts
